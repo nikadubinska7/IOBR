@@ -46,3 +46,21 @@ The same extractor can run without the UI:
 ```bash
 python3 iobr_app.py --input data/OBR_Output.xlsx --output output --season HO2026 --d-account GER-38
 ```
+
+## Build Windows Executable
+
+Windows executables must be built on Windows. The repository includes a GitHub Actions workflow that builds `iOBR Extractor.exe` automatically on every push to `main`, and can also be run manually from the GitHub `Actions` tab.
+
+Download path in GitHub:
+
+1. Open the repository on GitHub.
+2. Go to `Actions`.
+3. Open the latest `Build Windows App` run.
+4. Download the `iOBR-Extractor-Windows` artifact.
+5. Unzip it and run `iOBR Extractor.exe`.
+
+To build directly on a Windows laptop with Python installed, run PowerShell from the project folder:
+
+```powershell
+.\build_windows.ps1
+```
