@@ -6,6 +6,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   build-windows:
     runs-on: windows-latest
@@ -28,9 +31,20 @@ jobs:
       - name: Build executable
         run: |
           pyinstaller --noconfirm --clean --onefile --windowed --name "iOBR Extractor" iobr_app.py
+          Compress-Archive -Path "dist/iOBR Extractor.exe" -DestinationPath "dist/iOBR-Extractor-Windows.zip" -Force
 
       - name: Upload Windows executable
         uses: actions/upload-artifact@v4
         with:
           name: iOBR-Extractor-Windows
-          path: dist/iOBR Extractor.exe
+          path: dist/iOBR-Extractor-Windows.zip
+
+      - name: Publish latest Windows release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: windows-latest
+          name: Latest Windows Build
+          body: Download `iOBR-Extractor-Windows.zip`, unzip it, and run `iOBR Extractor.exe`.
+          files: dist/iOBR-Extractor-Windows.zip
+          make_latest: true
