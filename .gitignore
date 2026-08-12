@@ -1,0 +1,11 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+
+# Local source data and generated Excel outputs are not part of the app repo.
+data/
+output/
+*.xlsx
+
+# App run bookkeeping.
+.iobr_generated_manifest.json
